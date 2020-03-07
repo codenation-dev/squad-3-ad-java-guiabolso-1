@@ -34,7 +34,7 @@ public class UserController {
 
     @GetMapping("login/{user}/{password}")
     @ApiResponses(value = {	@ApiResponse(code = 200, message = "Authenticated user.") })
-    public ResponseEntity login(@PathVariable(value = "user") String email,
+    public ResponseEntity<JwtResponse> login(@PathVariable(value = "user") String email,
                                 @PathVariable(value = "password") String password) throws Exception{
 
          jwtThrowsException.authenticate(email, decodeBase64.decode(password));
@@ -43,7 +43,7 @@ public class UserController {
 
     @PostMapping("register")
     @ApiResponses(value = {	@ApiResponse(code = 200, message = "Successfully registered.")} )
-    public ResponseEntity saveUser(@RequestBody User user) throws Exception {
+    public ResponseEntity<User> saveUser(@RequestBody User user) throws Exception {
         return ResponseEntity.ok(userService.save(user));
     }
 }
