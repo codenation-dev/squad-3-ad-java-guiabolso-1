@@ -22,4 +22,4 @@ conf.xml
 .vscode/
 
 # DB
-/guiabolso/src/main/resources/application.properties
+src/main/resources/application.properties
