@@ -2,7 +2,6 @@ package com.errorscentral.guiabolso.controller;
 
 import com.errorscentral.guiabolso.component.*;
 import com.errorscentral.guiabolso.entity.User;
-import com.errorscentral.guiabolso.security.JwtRequest;
 import com.errorscentral.guiabolso.security.JwtResponse;
 import com.errorscentral.guiabolso.security.JwtThrowsException;
 import com.errorscentral.guiabolso.security.JwtTokenUtil;
@@ -33,11 +32,13 @@ public class UserController {
     @Autowired
     private JwtThrowsException jwtThrowsException;
 
-    @PostMapping("login")
+    @GetMapping("login/{user}/{password}")
     @ApiResponses(value = {	@ApiResponse(code = 200, message = "Authenticated user.") })
-    public ResponseEntity login(@RequestBody JwtRequest request) throws Exception{
-         jwtThrowsException.authenticate(request.getEmail(), decodeBase64.decode(request.getPassword()));
-         return ResponseEntity.ok(new JwtResponse(jwtTokenUtil.generateToken(request.getEmail())));
+    public ResponseEntity login(@PathVariable(value = "user") String email,
+                                @PathVariable(value = "password") String password) throws Exception{
+
+         jwtThrowsException.authenticate(email, decodeBase64.decode(password));
+         return ResponseEntity.ok(new JwtResponse(jwtTokenUtil.generateToken(email)));
     }
 
     @PostMapping("register")
