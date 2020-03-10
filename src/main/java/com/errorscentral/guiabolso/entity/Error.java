@@ -85,6 +85,14 @@ public class Error implements Serializable {
     public void setEvent(String event) {
         this.event = event;
     }
+    
+    public String getSystem() {
+        return system;
+    }
+
+    public void setSystem(String system) {
+        this.system = system;
+    }
 
     public LocalDate getCreatedDate() {
         return createdDate;
