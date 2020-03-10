@@ -54,29 +54,17 @@ public class Error implements Serializable {
 
 
     //Gets and Sets
-    public Long getId() {
-        return id;
-    }
+    public Long getId() {return id;}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
-    public User getUserId() {
-        return userId;
-    }
+    public User getUserId() {return userId;}
 
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
+    public void setUserId(User userId) {this.userId = userId;}
 
-    public String getLevel() {
-        return level;
-    }
+    public String getLevel() {return level;}
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
+    public void setLevel(String level) {this.level = level;}
 
     public String getEvent() {
         return event;
@@ -85,6 +73,10 @@ public class Error implements Serializable {
     public void setEvent(String event) {
         this.event = event;
     }
+
+    public String getSystem() {return system;}
+
+    public void setSystem(String system) {this.system = system;}
 
     public LocalDate getCreatedDate() {
         return createdDate;
@@ -117,4 +109,5 @@ public class Error implements Serializable {
     public void setUpdateDate(LocalDate updateDate) {
         this.updateDate = updateDate;
     }
+
 }
