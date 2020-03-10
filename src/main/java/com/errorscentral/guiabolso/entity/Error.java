@@ -78,6 +78,14 @@ public class Error implements Serializable {
         this.level = level;
     }
 
+    public String getEvent() {
+        return event;
+    }
+
+    public void setEvent(String event) {
+        this.event = event;
+    }
+
     public LocalDate getCreatedDate() {
         return createdDate;
     }
