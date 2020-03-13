@@ -55,7 +55,7 @@ public class ErrorController {
         try{
             Optional<Error> error = errorService.findError(id);
             if(error.isPresent()){
-                return new ResponseEntity<>(error, HttpStatus.OK);
+                return new ResponseEntity<>(errorService.findError(id), HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch(Exception e){
