@@ -46,4 +46,21 @@ public class ErrorController {
         }
 
     }
+
+    @GetMapping("error/{id}")
+    @ApiResponses(value = {	@ApiResponse(code = 200, message = "Error Found"),
+                            @ApiResponse(code = 404, message = "Error Not Found"),
+                            @ApiResponse(code = 400, message = "Request Not Done")})
+    public ResponseEntity<Optional<Error>> getError(@PathVariable(value = "id") long id){
+        try{
+            Optional<Error> error = errorService.findError(id);
+            if(error.isPresent()){
+                return new ResponseEntity<>(error, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch(Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
