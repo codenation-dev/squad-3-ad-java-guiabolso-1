@@ -10,17 +10,16 @@ import java.time.LocalDate;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="errors")
-public class Error implements Serializable {
-
-    private static final long SerialVersionUID = 1l;
-
+public class Error implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User user;
 
     @Column
     @NotNull
@@ -35,7 +34,7 @@ public class Error implements Serializable {
     @Column
     @NotNull
     @Size(min = 1, max = 20)
-    private String system;
+    private String environment;
 
     @Column(name = "created_date")
     private LocalDate createdDate;
@@ -63,11 +62,11 @@ public class Error implements Serializable {
     }
 
     public User getUserId() {
-        return userId;
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUserId(User user) {
+        this.user = user;
     }
 
     public String getLevel() {
@@ -86,12 +85,12 @@ public class Error implements Serializable {
         this.event = event;
     }
     
-    public String getSystem() {
-        return system;
+    public String getEnvironment() {
+        return environment;
     }
 
-    public void setSystem(String system) {
-        this.system = system;
+    public void setEnvironment(String environment) {
+        this.environment = environment;
     }
 
     public LocalDate getCreatedDate() {
