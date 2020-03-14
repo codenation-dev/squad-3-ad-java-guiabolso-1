@@ -1,11 +1,14 @@
 package com.errorscentral.guiabolso.service;
 
-import com.errorscentral.guiabolso.entity.Error;
-import com.errorscentral.guiabolso.repository.ErrorRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.errorscentral.guiabolso.entity.Error;
+import com.errorscentral.guiabolso.repository.ErrorRepository;
 
 @Service
 public class ErrorService {
@@ -19,5 +22,10 @@ public class ErrorService {
 
     public Error updateError(Error error){
         return errorRepository.save(error);
+    }
+    
+    public Page<Error> findAll(Pageable pageable){
+    	return errorRepository.findAllErrors(pageable);
+    	
     }
 }
