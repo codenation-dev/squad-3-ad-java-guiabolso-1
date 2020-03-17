@@ -32,7 +32,7 @@ public class User implements Serializable {
     private String lastName;
 
     @NotNull
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @Size(min = 1, max = 250)
     private String email;
 
