@@ -28,4 +28,7 @@ public class ErrorService {
     	return errorRepository.findAllErrors(pageable);
     	
     }
+    public Error add(Error error) {
+		return errorRepository.save(error);
+	}
 }
