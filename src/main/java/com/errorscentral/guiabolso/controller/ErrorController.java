@@ -83,6 +83,16 @@ public class ErrorController {
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-	}	
+	}
+    @PostMapping("error/{userId}")
+    public ResponseEntity<Error> addError(@RequestBody Error error){
+        try {
+            return new ResponseEntity<>((Error)errorService.add(error), HttpStatus.CREATED);
+            
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
 }
