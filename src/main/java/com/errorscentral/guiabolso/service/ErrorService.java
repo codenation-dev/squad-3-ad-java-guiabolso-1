@@ -23,8 +23,8 @@ public class ErrorService {
         return errorRepository.save(error);
     }
     
-    public List<Error> findAllError(){
-    	return errorRepository.findAllError();
+    public List<Error> findAllErros(){
+    	return errorRepository.findAll();
     	
     }
     public Error add(Error error) {

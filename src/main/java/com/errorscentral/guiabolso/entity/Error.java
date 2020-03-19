@@ -1,6 +1,8 @@
 package com.errorscentral.guiabolso.entity;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,78 +13,54 @@ import java.time.LocalDate;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="errors")
 
-@NamedNativeQuery(name = "findAllErrors", resultClass = Error.class, 
-resultSetMapping ="findAllErrors",
-query = "SELECT * FROM errors")
-
-@SqlResultSetMapping(
-	    name = "findAllErrors",
-	    entities = @EntityResult(entityClass = Error.class,
-	    fields = {
-	    		@FieldResult(name = "id", column = "id"),
-	    		@FieldResult(name = "level", column = "level"),
-	    		@FieldResult(name = "event", column = "event"),
-	    		@FieldResult(name = "environment", column = "environment"),
-	    		@FieldResult(name = "createdDate", column = "created_date"),
-	    		@FieldResult(name = "detailsLog", column = "details_log"),
-	    		@FieldResult(name = "updateDate", column = "update_date"),
-	    		@FieldResult(name = "filed", column = "filed"),
-	    		@FieldResult(name = "user", column = "user_id")
-	    }),
-	    classes = @ConstructorResult(
-	            targetClass = Error.class,
-	            columns = {
-	            		@ColumnResult(name = "id"),
-	                    @ColumnResult(name = "level"),
-	                    @ColumnResult(name = "event"),
-	                    @ColumnResult(name = "environment"),
-	                    @ColumnResult(name = "created_date"),
-	                    @ColumnResult(name = "details_log"),
-	                    @ColumnResult(name = "update_date"),
-	                    @ColumnResult(name = "filed"),
-	                    @ColumnResult(name = "user_id")
-	            }
-	    )
-	)
 public class Error implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(View.Summary.class)
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonView(View.Summary.class)
     private User user;
 
     @Column
     @NotNull
     @Size(min = 1, max = 20)
+    @JsonView(View.Summary.class)
     private String level;
 
     @Column
     @NotNull
     @Size(min = 1, max = 50)
+    @JsonView(View.Summary.class)
     private String event;
 
     @Column
     @NotNull
     @Size(min = 1, max = 20)
+    @JsonView(View.Summary.class)
     private String environment;
 
     @Column(name = "created_date")
+    @JsonView(View.Summary.class)
     private LocalDate createdDate;
 
     @Column(name = "details_log")
     @NotNull
     @Size(min = 1, max = 500)
+    @JsonView(View.Summary.class)
     private String detailsLog;
 
     @Column
     @NotNull
+    @JsonView(View.Summary.class)
     private Boolean filed;
 
     @Column(name = "update_date")
+    @JsonView(View.Summary.class)
     private LocalDate updateDate;
 
 

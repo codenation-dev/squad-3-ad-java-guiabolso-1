@@ -1,7 +1,9 @@
 package com.errorscentral.guiabolso.controller;
 
 import com.errorscentral.guiabolso.entity.Error;
+import com.errorscentral.guiabolso.entity.View;
 import com.errorscentral.guiabolso.service.ErrorService;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -55,6 +57,7 @@ public class ErrorController {
     @ApiResponses(value = {	@ApiResponse(code = 200, message = "Error Found"),
                             @ApiResponse(code = 404, message = "Error Not Found"),
                             @ApiResponse(code = 400, message = "Request Not Done")})
+    @JsonView(View.Summary.class)
     public ResponseEntity<Optional<Error>> getError(@PathVariable(value = "id") long id){
         try{
             Optional<Error> error = errorService.findError(id);
@@ -74,9 +77,10 @@ public class ErrorController {
         @ApiImplicitParam(name = "---", value = "---", required = false, dataType = "string", paramType = "query"),
         @ApiImplicitParam(name = "--", value = "--", required = false, dataType = "string", paramType = "query")
       })
+    @JsonView(View.Summary.class)
 	public ResponseEntity<List<Error>> getAll(){
 		try {
-			List<Error> error = errorService.findAllError();
+			List<Error> error = errorService.findAllErros();
 			return new ResponseEntity<List<Error>>(error, HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println("error: "+ e.getMessage());

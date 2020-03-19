@@ -1,6 +1,9 @@
 package com.errorscentral.guiabolso.entity;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,6 +18,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(View.Summary.class)
     private Long id;
 
     @Column(name = "password")
@@ -34,6 +38,7 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "email", unique = true)
     @Size(min = 1, max = 250)
+    @JsonView(View.Summary.class)
     private String email;
 
     public Long getId() {
