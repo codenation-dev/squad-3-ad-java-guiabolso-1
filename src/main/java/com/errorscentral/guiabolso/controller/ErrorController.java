@@ -8,13 +8,11 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -71,19 +69,21 @@ public class ErrorController {
     
     @GetMapping("error")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Request Not Done")})
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "page", value = "Page", required = false, dataType = "int", paramType = "query"),
-        @ApiImplicitParam(name = "size", value = "Errors per page", required = false, dataType = "int", paramType = "query"),
-        @ApiImplicitParam(name = "sort", value = "Sort by", required = false, dataType = "string", paramType = "query", example = "createdDate,asc")
+    @ApiImplicitParams({ //adicionar aqui os filtros
+        @ApiImplicitParam(name = "----", value = "----", required = false, dataType = "string", paramType = "query"),
+        @ApiImplicitParam(name = "---", value = "---", required = false, dataType = "string", paramType = "query"),
+        @ApiImplicitParam(name = "--", value = "--", required = false, dataType = "string", paramType = "query")
       })
-	public ResponseEntity<Page<Error>> getAll(@PageableDefault Pageable pageable){
+	public ResponseEntity<List<Error>> getAll(){
 		try {
-			Page<Error> error = errorService.findAll(pageable);
-			return new ResponseEntity<Page<Error>>(error, HttpStatus.OK);
+			List<Error> error = errorService.findAllError();
+			return new ResponseEntity<List<Error>>(error, HttpStatus.OK);
 		} catch (Exception e) {
+			System.out.println("error: "+ e.getMessage());
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
+    
     @PostMapping("error/{userId}")
     public ResponseEntity<Error> addError(@RequestBody Error error){
         try {

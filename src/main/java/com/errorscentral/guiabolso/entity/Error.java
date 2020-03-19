@@ -10,6 +10,40 @@ import java.time.LocalDate;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name="errors")
+
+@NamedNativeQuery(name = "findAllErrors", resultClass = Error.class, 
+resultSetMapping ="findAllErrors",
+query = "SELECT * FROM errors")
+
+@SqlResultSetMapping(
+	    name = "findAllErrors",
+	    entities = @EntityResult(entityClass = Error.class,
+	    fields = {
+	    		@FieldResult(name = "id", column = "id"),
+	    		@FieldResult(name = "level", column = "level"),
+	    		@FieldResult(name = "event", column = "event"),
+	    		@FieldResult(name = "environment", column = "environment"),
+	    		@FieldResult(name = "createdDate", column = "created_date"),
+	    		@FieldResult(name = "detailsLog", column = "details_log"),
+	    		@FieldResult(name = "updateDate", column = "update_date"),
+	    		@FieldResult(name = "filed", column = "filed"),
+	    		@FieldResult(name = "user", column = "user_id")
+	    }),
+	    classes = @ConstructorResult(
+	            targetClass = Error.class,
+	            columns = {
+	            		@ColumnResult(name = "id"),
+	                    @ColumnResult(name = "level"),
+	                    @ColumnResult(name = "event"),
+	                    @ColumnResult(name = "environment"),
+	                    @ColumnResult(name = "created_date"),
+	                    @ColumnResult(name = "details_log"),
+	                    @ColumnResult(name = "update_date"),
+	                    @ColumnResult(name = "filed"),
+	                    @ColumnResult(name = "user_id")
+	            }
+	    )
+	)
 public class Error implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
