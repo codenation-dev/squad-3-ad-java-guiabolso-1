@@ -86,7 +86,7 @@ public class ErrorController {
         if (environment.equals("null") && level.equals("null") && event.equals("null") && description.equals("null")) {
             try {
                 List<Error> error = errorService.findAllErros();
-                return new ResponseEntity<List<Error>>(error, HttpStatus.GONE);
+                return new ResponseEntity<List<Error>>(error, HttpStatus.OK);
             } catch (Exception e) {
                 System.out.println("error: " + e.getMessage());
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -114,7 +114,7 @@ public class ErrorController {
     @PostMapping("error/{userId}")
     public ResponseEntity<Error> addError(@RequestBody Error error){
         try {
-            return new ResponseEntity<>(errorService.add(error), HttpStatus.CREATED);
+            return new ResponseEntity<>((Error)errorService.add(error), HttpStatus.CREATED);
             
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

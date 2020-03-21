@@ -26,7 +26,7 @@ public interface ErrorRepository extends JpaRepository <Error, Long> {
 
     List<Error> findByLevelAndEnvironment(String level, String environment);
 
-    List<Error> findByEventAndEnvironment(String event, String environment);//
+    List<Error> findByEventAndEnvironment(String event, String environment);
 
 
 
