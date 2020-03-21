@@ -73,25 +73,48 @@ public class ErrorController {
     @GetMapping("error")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Request Not Done")})
     @ApiImplicitParams({ //adicionar aqui os filtros
-        @ApiImplicitParam(name = "----", value = "----", required = false, dataType = "string", paramType = "query"),
-        @ApiImplicitParam(name = "---", value = "---", required = false, dataType = "string", paramType = "query"),
-        @ApiImplicitParam(name = "--", value = "--", required = false, dataType = "string", paramType = "query")
-      })
+            @ApiImplicitParam(name = "environment", value = "----", required = false, dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "level", value = "---", required = false, dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "event", value = "--", required = false, dataType = "string", paramType = "query"),
+            @ApiImplicitParam(name = "description", value = "--", required = false, dataType = "string", paramType = "query")
+    })
     @JsonView(View.Summary.class)
-	public ResponseEntity<List<Error>> getAll(){
-		try {
-			List<Error> error = errorService.findAllErros();
-			return new ResponseEntity<List<Error>>(error, HttpStatus.OK);
-		} catch (Exception e) {
-			System.out.println("error: "+ e.getMessage());
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-	}
+    public ResponseEntity<List<Error>> getAll(@RequestParam(required = false, defaultValue = "null") String environment,
+                                              @RequestParam(required = false, defaultValue = "null") String level,
+                                              @RequestParam(required = false, defaultValue = "null") String event,
+                                              @RequestParam(required = false, defaultValue = "null") String description) {
+        if (environment.equals("null") && level.equals("null") && event.equals("null") && description.equals("null")) {
+            try {
+                List<Error> error = errorService.findAllErros();
+                return new ResponseEntity<List<Error>>(error, HttpStatus.GONE);
+            } catch (Exception e) {
+                System.out.println("error: " + e.getMessage());
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }
+        else {
+            if (description.equals("null")) {
+                try {
+                    return new ResponseEntity<List<Error>>(errorService.listErrorFilter(environment, level, event), HttpStatus.OK);
+                } catch (Exception e) {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
+            }
+            else {
+                System.out.println("cge");
+                try {
+                    return new ResponseEntity<List<Error>>(errorService.listErrorDescription(description), HttpStatus.OK);
+                } catch (Exception e) {
+                    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+                }
+            }
+        }
+    }
     
     @PostMapping("error/{userId}")
     public ResponseEntity<Error> addError(@RequestBody Error error){
         try {
-            return new ResponseEntity<>((Error)errorService.add(error), HttpStatus.CREATED);
+            return new ResponseEntity<>(errorService.add(error), HttpStatus.CREATED);
             
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
