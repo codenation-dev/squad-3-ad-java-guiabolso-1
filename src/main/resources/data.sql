@@ -1,16 +1,16 @@
 /* users values: id, password, firstName, lastName, email */
 INSERT INTO users(password,first_name,last_name,email) VALUES
-('password1','Ada','Lovelace','ada.lovelace@gmail.com'),
-('password2','Betty','Snyder','betty.snyder@gmail.com'),
-('password3','Grace','Hopper','grace.hopper@gmail.com'),
-('password4','Karen','Sparck Jones','karen.jones@gmail.com'),
-('password5','Carol','Shaw','carol.shaw@gmail.com'),
-('password6','Roberta','Williams','roberta.williams@gmail.com'),
-('password7','Frances','Allen','frances.allen@gmail.com');
+('$2a$10$p.U.3Y4sbTG2m4AyeTG5ruYq7E342kU9JB8UoylxV6aStZGXnEMpO','Ada','Lovelace','ada.lovelace@gmail.com'),
+('$2a$10$p.U.3Y4sbTG2m4AyeTG5ruYq7E342kU9JB8UoylxV6aStZGXnEMpO','Betty','Snyder','betty.snyder@gmail.com'),
+('$2a$10$p.U.3Y4sbTG2m4AyeTG5ruYq7E342kU9JB8UoylxV6aStZGXnEMpO','Grace','Hopper','grace.hopper@gmail.com'),
+('$2a$10$p.U.3Y4sbTG2m4AyeTG5ruYq7E342kU9JB8UoylxV6aStZGXnEMpO','Karen','Sparck Jones','karen.jones@gmail.com'),
+('$2a$10$p.U.3Y4sbTG2m4AyeTG5ruYq7E342kU9JB8UoylxV6aStZGXnEMpO','Carol','Shaw','carol.shaw@gmail.com'),
+('$2a$10$p.U.3Y4sbTG2m4AyeTG5ruYq7E342kU9JB8UoylxV6aStZGXnEMpO','Roberta','Williams','roberta.williams@gmail.com'),
+('$2a$10$p.U.3Y4sbTG2m4AyeTG5ruYq7E342kU9JB8UoylxV6aStZGXnEMpO','Frances','Allen','frances.allen@gmail.com');
 
 /* errors values: id, userId, level, event, system, LocalDate createdDate,
 @Size(min = 1, max = 500)detailsLog, filed, LocalDate updateDate */
-INSERT INTO errors(user_id,level,event,system,created_date,details_log,filed) VALUES
+INSERT INTO errors(user_id,level,event,environment,created_date,details_log,filed) VALUES
 (1,'Warning','Create','Produção','10-02-2019','File src/github/Example.java, line 120, in ExampleController',false),
 (1,'Error','Create','Produção','10-03-2019','File src/details/Example.java, line 122, in ExampleController',false),
 (1,'Info','Create','Produção','11-02-2019','File src/console/Example.java, line 11, in ExampleController',false),
