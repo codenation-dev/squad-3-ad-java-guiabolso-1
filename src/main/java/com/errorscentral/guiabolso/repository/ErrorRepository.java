@@ -12,6 +12,8 @@ public interface ErrorRepository extends JpaRepository <Error, Long> {
 
     Optional<Error> findById(Long id);
 
+    List<Error> findByFiled(Boolean filed);
+
     List<Error> findByLevelAndEventAndEnvironment(String level, String event, String environment);
 
     List<Error> findByLevel(String level);
