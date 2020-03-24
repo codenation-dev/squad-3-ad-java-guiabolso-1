@@ -72,7 +72,7 @@ public class ErrorController {
     
     @GetMapping("error")
     @ApiResponses(value = {@ApiResponse(code = 400, message = "Request Not Done")})
-    @ApiImplicitParams({ //adicionar aqui os filtros
+    @ApiImplicitParams({
             @ApiImplicitParam(name = "environment", value = "----", required = false, dataType = "string", paramType = "query"),
             @ApiImplicitParam(name = "level", value = "---", required = false, dataType = "string", paramType = "query"),
             @ApiImplicitParam(name = "event", value = "--", required = false, dataType = "string", paramType = "query"),
@@ -101,7 +101,6 @@ public class ErrorController {
                 }
             }
             else {
-                System.out.println("cge");
                 try {
                     return new ResponseEntity<List<Error>>(errorService.listErrorDescription(description), HttpStatus.OK);
                 } catch (Exception e) {

@@ -24,7 +24,7 @@ public class ErrorService {
     }
 
     public List<Error> findAllErros(){
-    	return errorRepository.findAll();
+    	return errorRepository.findByFiled(false);
 
     }
     public Error add(Error error) {
