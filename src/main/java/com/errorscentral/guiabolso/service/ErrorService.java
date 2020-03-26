@@ -33,19 +33,19 @@ public class ErrorService {
 
     public List<Error> listErrorFilter(String environment, String level, String event) {
         if (!environment.equals("null") && !level.equals("null") && !event.equals("null")) {
-            return errorRepository.findByLevelAndEventAndEnvironment(level, event, environment);
+            return errorRepository.findByLevelContainingIgnoreCaseAndEventContainingIgnoreCaseAndEnvironmentContainingIgnoreCase(level, event, environment);
         } else if (!environment.equals("null") && !level.equals("null")) {
-            return errorRepository.findByLevelAndEnvironment(level, environment);
+            return errorRepository.findByLevelContainingIgnoreCaseAndEnvironmentContainingIgnoreCase(level, environment);
         } else if (!environment.equals("null") && !event.equals("null")) {
-            return errorRepository.findByEventAndEnvironment(event, environment);
+            return errorRepository.findByEventContainingIgnoreCaseAndEnvironmentContainingIgnoreCase(event, environment);
         } else if(!level.equals("null") && !event.equals("null")) {
-            return errorRepository.findByLevelAndEvent(level, event);
+            return errorRepository.findByLevelContainingIgnoreCaseAndEventContainingIgnoreCase(level, event);
         }else if(!environment.equals("null")) {
-            return errorRepository.findByEnvironment(environment);
+            return errorRepository.findByEnvironmentContainingIgnoreCase(environment);
         }else if (!event.equals("null")){
-            return errorRepository.findByEvent(event);
+            return errorRepository.findByEventContainingIgnoreCase(event);
         }else{
-            return errorRepository.findByLevel(level);
+            return errorRepository.findByLevelContainingIgnoreCase(level);
         }
     }
 
