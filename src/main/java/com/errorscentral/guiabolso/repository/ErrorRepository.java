@@ -14,21 +14,21 @@ public interface ErrorRepository extends JpaRepository <Error, Long> {
 
     List<Error> findByFiled(Boolean filed);
 
-    List<Error> findByLevelAndEventAndEnvironment(String level, String event, String environment);
+    List<Error> findByLevelContainingIgnoreCaseAndEventContainingIgnoreCaseAndEnvironmentContainingIgnoreCase(String level, String event, String environment);
 
-    List<Error> findByLevel(String level);
+    List<Error> findByLevelContainingIgnoreCase(String level);
 
-    List<Error> findByEvent(String event);
+    List<Error> findByEventContainingIgnoreCase(String event);
 
-    List<Error> findByEnvironment(String enrivonment);
+    List<Error> findByEnvironmentContainingIgnoreCase(String enrivonment);
 
     List<Error> findByDetailsLogContainingIgnoreCase(String description);
 
-    List<Error> findByLevelAndEvent(String level, String event);
+    List<Error> findByLevelContainingIgnoreCaseAndEventContainingIgnoreCase(String level, String event);
 
-    List<Error> findByLevelAndEnvironment(String level, String environment);
+    List<Error> findByLevelContainingIgnoreCaseAndEnvironmentContainingIgnoreCase(String level, String environment);
 
-    List<Error> findByEventAndEnvironment(String event, String environment);
+    List<Error> findByEventContainingIgnoreCaseAndEnvironmentContainingIgnoreCase(String event, String environment);
 
 
 
